@@ -23,13 +23,12 @@ pipeline {
             steps {
                 sh '''
                     echo "PATH = $PATH"
-                    which git
-                    git --version
-                    which docker
-                    docker --version || echo "Docker CLI not found"
-                    which terraform
-                    terraform -version || echo "Terraform not found"
-                    docker --version
+                    stage('Build Docker Image') {
+    steps {
+        sh 'docker --version'
+        sh 'docker build -t myimage:latest .'
+    }
+}
                 '''
             }
         }
