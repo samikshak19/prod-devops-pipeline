@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Clone Repository') {
       steps {
-        git 'https://github.com/samikshak19/prod-devops-pipeline'
+        git 'https://github.com/samikshak19/prod-devops-pipeline.git', branch: 'main', credentialsId: 'Jenkins-git'
       }
     }
     stage('Build Docker Image') {
@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Run Container') {
       steps {
-        sh 'docker run -d -p 5000:5000 devops-app'
+        sh 'docker run -d -p 5001:5001 devops-app'
       }
     }
   }
