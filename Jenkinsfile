@@ -1,26 +1,29 @@
-pipeline {  
-	agent any  
-		  stages {    
-			  stage('Clone Repository') {      
-				  steps {        
-					  git 'https://github.com/samikshak19/prod-devops-pipeline.git', branch: 'main', credentialsId: 'Jenkins-git'      
-					  steps  {  
-						  git (url: 'https://github.com/samikshak19/prod-devops-pipeline.git',    
-							   branch: 'main',    credentialsId: 'Jenkins-git')            
-							      }    
-				  }    
-				  stage('Build Docker Image') {      
-					  
-					  steps {        sh 'docker build -t devops-app .'   
-							} 
-				  }    
-				  
-				  stage('Run Container') {      
-					  
-					  steps {        
-						  sh 'docker run -d -p 5001:5001 devops-app'      
-					}    
-				  }  
-			  }
-		  }
+pipeline {
+  agent any
 
+  environment {
+    PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  }
+
+  stages {
+    stage('Test Shell') {
+      steps {
+        sh 'echo "Hello from Jenkins"'
+        sh 'which docker || true'
+        sh 'docker --version || true'
+      }
+    }
+
+    stage('Build Docker Image') {
+      steps {
+        sh 'docker build -t devops-app .'
+      }
+    }
+
+    stage('Run Container') {
+      steps {
+        sh 'docker run -d -p 5001:5001 devops-app'
+      }
+    }
+  }
+}
