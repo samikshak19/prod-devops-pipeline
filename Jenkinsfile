@@ -1,10 +1,11 @@
 pipeline {
     agent any
 
-    environment {
-        // Explicitly append /opt/homebrew/bin to PATH
-        PATH = "/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin"
-    }
+    
+   environment {
+    PATH = "/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:/usr/local/bin"
+}
+
 
     stages {
 
@@ -28,6 +29,7 @@ pipeline {
                     docker --version || echo "Docker CLI not found"
                     which terraform
                     terraform -version || echo "Terraform not found"
+                    docker --version
                 '''
             }
         }
