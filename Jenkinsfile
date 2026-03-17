@@ -22,7 +22,7 @@ pipeline {
 
     stage('Run Container') {
       steps {
-        sh 'docker run -d -p 5002:5001 devops-app'
+        sh 'docker run -d -p 5002:5002 devops-app'
       }
     }
   }
