@@ -2,8 +2,12 @@ pipeline {
   agent any
   stages {
     stage('Clone Repository') {
-      steps {
-        git 'https://github.com/samikshak19/prod-devops-pipeline.git', branch: 'main', credentialsId: 'Jenkins-git'
+      steps  {  git(
+    url: 'https://github.com/samikshak19/prod-devops-pipeline.git',
+    branch: 'main',
+    credentialsId: 'Jenkins-git'
+                )
+       
       }
     }
     stage('Build Docker Image') {
