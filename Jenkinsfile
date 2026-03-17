@@ -1,17 +1,15 @@
 pipeline {
     agent any
 
-    // Fix PATH issues on macOS / Jenkins
     environment {
-        PATH = "/usr/bin:/bin:/usr/sbin:/sbin"
-        PATH+EXTRA = "/opt/homebrew/bin"
+        // Explicitly append /opt/homebrew/bin to PATH
+        PATH = "/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin"
     }
 
     stages {
 
         stage('Checkout Repository') {
             steps {
-                // Explicit named arguments required
                 git(
                     url: 'https://github.com/samikshak19/prod-devops-pipeline.git',
                     branch: 'main',
@@ -42,7 +40,6 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                // Remove any previous container with same name
                 sh '''
                     docker rm -f devops-app-container || true
                     docker run -d --name devops-app-container -p 5001:5001 devops-app
