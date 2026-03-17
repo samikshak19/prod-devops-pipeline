@@ -42,14 +42,14 @@ pipeline {
             }
         }
 
-        stage('Run Docker Container') {
-            steps {
-                sh '''
-                    docker rm -f devops-app-container || true
-                    docker run -d --name devops-app-container -p 5001:5001 devops-app
-                '''
-            }
-        }
+        stage('Run Container') {
+    steps {
+        sh '''
+            docker rm -f devops-app-container || true
+            docker run -d --name devops-app-container -p 5001:5001 devops-app
+        '''
+    }
+}
 
         stage('Terraform Init & Plan') {
             steps {
