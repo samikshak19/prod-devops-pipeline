@@ -23,7 +23,10 @@ pipeline {
             steps {
                 sh '''
                     echo "PATH = $PATH"
-                    stage('Build Docker Image') {
+                    stage('Build Docker Image') 
+                    '''
+            }
+        }
     steps {
         sh 'docker --version'
         sh 'docker build -t myimage:latest .'
