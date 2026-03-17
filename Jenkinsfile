@@ -10,6 +10,16 @@ pipeline {
        
       }
     }
+    stage('Debug PATH') {
+    steps {
+        sh '''
+            echo $PATH
+            which docker
+            which python3
+            which git
+        '''
+    }
+}
     stage('Build Docker Image') {
       steps {
         sh 'docker build -t devops-app .'
